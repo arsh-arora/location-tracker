@@ -8,7 +8,7 @@ import dagger.internal.QualifierMetadata;
 import dagger.internal.ScopeMetadata;
 import javax.annotation.processing.Generated;
 import javax.inject.Provider;
-import okhttp3.OkHttpClient;
+import retrofit2.Retrofit;
 
 @ScopeMetadata("javax.inject.Singleton")
 @QualifierMetadata
@@ -24,23 +24,22 @@ import okhttp3.OkHttpClient;
     "KotlinInternalInJava"
 })
 public final class NetworkModule_ProvideApiServiceFactory implements Factory<ApiService> {
-  private final Provider<OkHttpClient> okHttpClientProvider;
+  private final Provider<Retrofit> retrofitProvider;
 
-  public NetworkModule_ProvideApiServiceFactory(Provider<OkHttpClient> okHttpClientProvider) {
-    this.okHttpClientProvider = okHttpClientProvider;
+  public NetworkModule_ProvideApiServiceFactory(Provider<Retrofit> retrofitProvider) {
+    this.retrofitProvider = retrofitProvider;
   }
 
   @Override
   public ApiService get() {
-    return provideApiService(okHttpClientProvider.get());
+    return provideApiService(retrofitProvider.get());
   }
 
-  public static NetworkModule_ProvideApiServiceFactory create(
-      Provider<OkHttpClient> okHttpClientProvider) {
-    return new NetworkModule_ProvideApiServiceFactory(okHttpClientProvider);
+  public static NetworkModule_ProvideApiServiceFactory create(Provider<Retrofit> retrofitProvider) {
+    return new NetworkModule_ProvideApiServiceFactory(retrofitProvider);
   }
 
-  public static ApiService provideApiService(OkHttpClient okHttpClient) {
-    return Preconditions.checkNotNullFromProvides(NetworkModule.INSTANCE.provideApiService(okHttpClient));
+  public static ApiService provideApiService(Retrofit retrofit) {
+    return Preconditions.checkNotNullFromProvides(NetworkModule.INSTANCE.provideApiService(retrofit));
   }
 }

@@ -20,6 +20,8 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         
         buildConfigField("String", "API_BASE_URL", "\"https://api.arshtraders.com/\"")
+        buildConfigField("String", "SUPABASE_URL", "\"https://yurbvscbtfyadlljlkmf.supabase.co\"")
+        buildConfigField("String", "SUPABASE_ANON_KEY", "\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl1cmJ2c2NidGZ5YWRsbGpsa21mIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTczNDQzMTcsImV4cCI6MjA3MjkyMDMxN30.r22o0Y92I_3DwPbRlukwJrgrOTPZH269xGQ26xv_03M\"")
     }
 
     buildTypes {
@@ -104,8 +106,23 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
     
+    // Supabase
+    implementation("io.github.jan-tennert.supabase:postgrest-kt:2.0.4")
+    implementation("io.github.jan-tennert.supabase:gotrue-kt:2.0.4")
+    implementation("io.github.jan-tennert.supabase:realtime-kt:2.0.4")
+    implementation("io.ktor:ktor-client-android:2.3.5")
+    
     // Timber Logging
     implementation("com.jakewharton.timber:timber:5.0.1")
+    
+    // Authentication & Security
+    implementation("androidx.security:security-crypto:1.1.0-alpha06")
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
+    
+    // JWT Token handling  
+    implementation("io.jsonwebtoken:jjwt-api:0.11.5")
+    implementation("io.jsonwebtoken:jjwt-impl:0.11.5")
+    implementation("io.jsonwebtoken:jjwt-jackson:0.11.5")
     
     // Testing
     testImplementation("junit:junit:4.13.2")

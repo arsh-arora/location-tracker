@@ -13,15 +13,22 @@ import com.arshtraders.fieldtracker.data.database.entities.*
     entities = [
         LocationPointEntity::class,
         PunchEntity::class,
-        PlaceEntity::class
+        PlaceEntity::class,
+        UserEntity::class,
+        TeamEntity::class,
+        TeamMemberEntity::class,
+        AuditLogEntity::class
     ],
-    version = 2,
+    version = 4,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
     abstract fun locationDao(): LocationDao
     abstract fun punchDao(): PunchDao
     abstract fun placeDao(): PlaceDao
+    abstract fun userDao(): UserDao
+    abstract fun teamDao(): TeamDao
+    abstract fun auditLogDao(): AuditLogDao
     
     companion object {
         const val DATABASE_NAME = "fieldtracker_database"

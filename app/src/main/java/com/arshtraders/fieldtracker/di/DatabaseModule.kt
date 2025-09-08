@@ -6,6 +6,9 @@ import com.arshtraders.fieldtracker.data.database.AppDatabase
 import com.arshtraders.fieldtracker.data.database.dao.LocationDao
 import com.arshtraders.fieldtracker.data.database.dao.PlaceDao
 import com.arshtraders.fieldtracker.data.database.dao.PunchDao
+import com.arshtraders.fieldtracker.data.database.dao.UserDao
+import com.arshtraders.fieldtracker.data.database.dao.TeamDao
+import com.arshtraders.fieldtracker.data.database.dao.AuditLogDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -39,4 +42,13 @@ object DatabaseModule {
     
     @Provides
     fun providePlaceDao(database: AppDatabase): PlaceDao = database.placeDao()
+    
+    @Provides
+    fun provideUserDao(database: AppDatabase): UserDao = database.userDao()
+    
+    @Provides
+    fun provideTeamDao(database: AppDatabase): TeamDao = database.teamDao()
+    
+    @Provides
+    fun provideAuditLogDao(database: AppDatabase): AuditLogDao = database.auditLogDao()
 }

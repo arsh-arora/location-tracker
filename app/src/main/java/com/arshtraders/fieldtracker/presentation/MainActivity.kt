@@ -12,11 +12,22 @@ import androidx.compose.ui.unit.dp
 import com.arshtraders.fieldtracker.presentation.permissions.PermissionManager
 import com.arshtraders.fieldtracker.presentation.theme.FieldTrackerTheme
 import com.arshtraders.fieldtracker.presentation.navigation.AppNavigation
+import com.arshtraders.fieldtracker.presentation.auth.LoginScreen
+import com.arshtraders.fieldtracker.presentation.auth.RegisterScreen
+import com.arshtraders.fieldtracker.domain.auth.AuthState
+import com.arshtraders.fieldtracker.domain.auth.TokenManager
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+    
+    @Inject
+    lateinit var tokenManager: TokenManager
     
     private lateinit var permissionManager: PermissionManager
     
@@ -33,7 +44,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    MainScreen(permissionManager)
+                    MainScreen(permissionManager, tokenManager)
                 }
             }
         }
@@ -42,7 +53,61 @@ class MainActivity : ComponentActivity() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreen(permissionManager: PermissionManager) {
+fun MainScreen(permissionManager: PermissionManager, tokenManager: TokenManager) {
+    val authState by tokenManager.authState.collectAsState(initial = AuthState.Loading)
+    val navController = rememberNavController()
+    
+    when (authState) {
+        is AuthState.Loading -> {
+            // Show loading screen while checking authentication
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                CircularProgressIndicator()
+            }
+        }
+        
+        is AuthState.Unauthenticated -> {
+            // Show authentication screens
+            NavHost(
+                navController = navController,
+                startDestination = "login"
+            ) {
+                composable("login") {
+                    LoginScreen(
+                        onNavigateToRegister = {
+                            navController.navigate("register")
+                        },
+                        onLoginSuccess = {
+                            // Authentication success will be handled by the TokenManager's state change
+                        }
+                    )
+                }
+                
+                composable("register") {
+                    RegisterScreen(
+                        onNavigateToLogin = {
+                            navController.popBackStack()
+                        },
+                        onRegisterSuccess = {
+                            // Authentication success will be handled by the TokenManager's state change
+                        }
+                    )
+                }
+            }
+        }
+        
+        is AuthState.Authenticated -> {
+            // Show app with permission check
+            AuthenticatedScreen(permissionManager)
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun AuthenticatedScreen(permissionManager: PermissionManager) {
     var hasPermissions by remember { mutableStateOf(false) }
     var permissionChecked by remember { mutableStateOf(false) }
     

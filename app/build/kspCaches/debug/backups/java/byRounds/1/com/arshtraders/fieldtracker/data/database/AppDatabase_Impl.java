@@ -11,12 +11,18 @@ import androidx.room.util.DBUtil;
 import androidx.room.util.TableInfo;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 import androidx.sqlite.db.SupportSQLiteOpenHelper;
+import com.arshtraders.fieldtracker.data.database.dao.AuditLogDao;
+import com.arshtraders.fieldtracker.data.database.dao.AuditLogDao_Impl;
 import com.arshtraders.fieldtracker.data.database.dao.LocationDao;
 import com.arshtraders.fieldtracker.data.database.dao.LocationDao_Impl;
 import com.arshtraders.fieldtracker.data.database.dao.PlaceDao;
 import com.arshtraders.fieldtracker.data.database.dao.PlaceDao_Impl;
 import com.arshtraders.fieldtracker.data.database.dao.PunchDao;
 import com.arshtraders.fieldtracker.data.database.dao.PunchDao_Impl;
+import com.arshtraders.fieldtracker.data.database.dao.TeamDao;
+import com.arshtraders.fieldtracker.data.database.dao.TeamDao_Impl;
+import com.arshtraders.fieldtracker.data.database.dao.UserDao;
+import com.arshtraders.fieldtracker.data.database.dao.UserDao_Impl;
 import java.lang.Class;
 import java.lang.Override;
 import java.lang.String;
@@ -38,17 +44,27 @@ public final class AppDatabase_Impl extends AppDatabase {
 
   private volatile PlaceDao _placeDao;
 
+  private volatile UserDao _userDao;
+
+  private volatile TeamDao _teamDao;
+
+  private volatile AuditLogDao _auditLogDao;
+
   @Override
   @NonNull
   protected SupportSQLiteOpenHelper createOpenHelper(@NonNull final DatabaseConfiguration config) {
-    final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(config, new RoomOpenHelper.Delegate(2) {
+    final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(config, new RoomOpenHelper.Delegate(4) {
       @Override
       public void createAllTables(@NonNull final SupportSQLiteDatabase db) {
         db.execSQL("CREATE TABLE IF NOT EXISTS `location_points` (`id` TEXT NOT NULL, `userId` TEXT NOT NULL, `deviceId` TEXT NOT NULL, `timestamp` INTEGER NOT NULL, `latitude` REAL NOT NULL, `longitude` REAL NOT NULL, `accuracy` REAL NOT NULL, `speed` REAL, `provider` TEXT NOT NULL, `isMockLocation` INTEGER NOT NULL, `batteryLevel` INTEGER, `isUploaded` INTEGER NOT NULL, `createdAt` INTEGER NOT NULL, PRIMARY KEY(`id`))");
         db.execSQL("CREATE TABLE IF NOT EXISTS `punches` (`id` TEXT NOT NULL, `userId` TEXT NOT NULL, `placeId` TEXT, `type` TEXT NOT NULL, `timestamp` INTEGER NOT NULL, `latitude` REAL NOT NULL, `longitude` REAL NOT NULL, `accuracy` REAL NOT NULL, `serverDistance` REAL, `evidence` TEXT, `isUploaded` INTEGER NOT NULL, `syncStatus` TEXT NOT NULL, `createdAt` INTEGER NOT NULL, PRIMARY KEY(`id`))");
         db.execSQL("CREATE TABLE IF NOT EXISTS `places` (`id` TEXT NOT NULL, `name` TEXT NOT NULL, `latitude` REAL NOT NULL, `longitude` REAL NOT NULL, `radius` INTEGER NOT NULL, `status` TEXT NOT NULL, `createdAt` INTEGER NOT NULL, `updatedAt` INTEGER NOT NULL, `formattedAddress` TEXT, `placeType` TEXT, `locality` TEXT, `subLocality` TEXT, `thoroughfare` TEXT, `featureName` TEXT, PRIMARY KEY(`id`))");
+        db.execSQL("CREATE TABLE IF NOT EXISTS `users` (`id` TEXT NOT NULL, `email` TEXT NOT NULL, `name` TEXT NOT NULL, `role` TEXT NOT NULL, `profilePictureUrl` TEXT, `phoneNumber` TEXT, `department` TEXT, `employeeId` TEXT, `isActive` INTEGER NOT NULL, `createdAt` INTEGER NOT NULL, `updatedAt` INTEGER NOT NULL, `lastLoginAt` INTEGER, PRIMARY KEY(`id`))");
+        db.execSQL("CREATE TABLE IF NOT EXISTS `teams` (`id` TEXT NOT NULL, `name` TEXT NOT NULL, `description` TEXT, `managerId` TEXT NOT NULL, `createdBy` TEXT NOT NULL, `isActive` INTEGER NOT NULL, `createdAt` INTEGER NOT NULL, `updatedAt` INTEGER NOT NULL, PRIMARY KEY(`id`))");
+        db.execSQL("CREATE TABLE IF NOT EXISTS `team_members` (`teamId` TEXT NOT NULL, `userId` TEXT NOT NULL, `role` TEXT NOT NULL, `joinedAt` INTEGER NOT NULL, `isActive` INTEGER NOT NULL, PRIMARY KEY(`teamId`, `userId`))");
+        db.execSQL("CREATE TABLE IF NOT EXISTS `audit_logs` (`id` TEXT NOT NULL, `userId` TEXT NOT NULL, `action` TEXT NOT NULL, `entityType` TEXT NOT NULL, `entityId` TEXT, `details` TEXT, `timestamp` INTEGER NOT NULL, `deviceInfo` TEXT, `ipAddress` TEXT, PRIMARY KEY(`id`))");
         db.execSQL("CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)");
-        db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'ac732b0551bbbe92b728c33bff4c6f7d')");
+        db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '2e45835eaa5b59fdf793cb992e65872b')");
       }
 
       @Override
@@ -56,6 +72,10 @@ public final class AppDatabase_Impl extends AppDatabase {
         db.execSQL("DROP TABLE IF EXISTS `location_points`");
         db.execSQL("DROP TABLE IF EXISTS `punches`");
         db.execSQL("DROP TABLE IF EXISTS `places`");
+        db.execSQL("DROP TABLE IF EXISTS `users`");
+        db.execSQL("DROP TABLE IF EXISTS `teams`");
+        db.execSQL("DROP TABLE IF EXISTS `team_members`");
+        db.execSQL("DROP TABLE IF EXISTS `audit_logs`");
         final List<? extends RoomDatabase.Callback> _callbacks = mCallbacks;
         if (_callbacks != null) {
           for (RoomDatabase.Callback _callback : _callbacks) {
@@ -169,9 +189,83 @@ public final class AppDatabase_Impl extends AppDatabase {
                   + " Expected:\n" + _infoPlaces + "\n"
                   + " Found:\n" + _existingPlaces);
         }
+        final HashMap<String, TableInfo.Column> _columnsUsers = new HashMap<String, TableInfo.Column>(12);
+        _columnsUsers.put("id", new TableInfo.Column("id", "TEXT", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsUsers.put("email", new TableInfo.Column("email", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsUsers.put("name", new TableInfo.Column("name", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsUsers.put("role", new TableInfo.Column("role", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsUsers.put("profilePictureUrl", new TableInfo.Column("profilePictureUrl", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsUsers.put("phoneNumber", new TableInfo.Column("phoneNumber", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsUsers.put("department", new TableInfo.Column("department", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsUsers.put("employeeId", new TableInfo.Column("employeeId", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsUsers.put("isActive", new TableInfo.Column("isActive", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsUsers.put("createdAt", new TableInfo.Column("createdAt", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsUsers.put("updatedAt", new TableInfo.Column("updatedAt", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsUsers.put("lastLoginAt", new TableInfo.Column("lastLoginAt", "INTEGER", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        final HashSet<TableInfo.ForeignKey> _foreignKeysUsers = new HashSet<TableInfo.ForeignKey>(0);
+        final HashSet<TableInfo.Index> _indicesUsers = new HashSet<TableInfo.Index>(0);
+        final TableInfo _infoUsers = new TableInfo("users", _columnsUsers, _foreignKeysUsers, _indicesUsers);
+        final TableInfo _existingUsers = TableInfo.read(db, "users");
+        if (!_infoUsers.equals(_existingUsers)) {
+          return new RoomOpenHelper.ValidationResult(false, "users(com.arshtraders.fieldtracker.data.database.entities.UserEntity).\n"
+                  + " Expected:\n" + _infoUsers + "\n"
+                  + " Found:\n" + _existingUsers);
+        }
+        final HashMap<String, TableInfo.Column> _columnsTeams = new HashMap<String, TableInfo.Column>(8);
+        _columnsTeams.put("id", new TableInfo.Column("id", "TEXT", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsTeams.put("name", new TableInfo.Column("name", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsTeams.put("description", new TableInfo.Column("description", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsTeams.put("managerId", new TableInfo.Column("managerId", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsTeams.put("createdBy", new TableInfo.Column("createdBy", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsTeams.put("isActive", new TableInfo.Column("isActive", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsTeams.put("createdAt", new TableInfo.Column("createdAt", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsTeams.put("updatedAt", new TableInfo.Column("updatedAt", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        final HashSet<TableInfo.ForeignKey> _foreignKeysTeams = new HashSet<TableInfo.ForeignKey>(0);
+        final HashSet<TableInfo.Index> _indicesTeams = new HashSet<TableInfo.Index>(0);
+        final TableInfo _infoTeams = new TableInfo("teams", _columnsTeams, _foreignKeysTeams, _indicesTeams);
+        final TableInfo _existingTeams = TableInfo.read(db, "teams");
+        if (!_infoTeams.equals(_existingTeams)) {
+          return new RoomOpenHelper.ValidationResult(false, "teams(com.arshtraders.fieldtracker.data.database.entities.TeamEntity).\n"
+                  + " Expected:\n" + _infoTeams + "\n"
+                  + " Found:\n" + _existingTeams);
+        }
+        final HashMap<String, TableInfo.Column> _columnsTeamMembers = new HashMap<String, TableInfo.Column>(5);
+        _columnsTeamMembers.put("teamId", new TableInfo.Column("teamId", "TEXT", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsTeamMembers.put("userId", new TableInfo.Column("userId", "TEXT", true, 2, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsTeamMembers.put("role", new TableInfo.Column("role", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsTeamMembers.put("joinedAt", new TableInfo.Column("joinedAt", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsTeamMembers.put("isActive", new TableInfo.Column("isActive", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        final HashSet<TableInfo.ForeignKey> _foreignKeysTeamMembers = new HashSet<TableInfo.ForeignKey>(0);
+        final HashSet<TableInfo.Index> _indicesTeamMembers = new HashSet<TableInfo.Index>(0);
+        final TableInfo _infoTeamMembers = new TableInfo("team_members", _columnsTeamMembers, _foreignKeysTeamMembers, _indicesTeamMembers);
+        final TableInfo _existingTeamMembers = TableInfo.read(db, "team_members");
+        if (!_infoTeamMembers.equals(_existingTeamMembers)) {
+          return new RoomOpenHelper.ValidationResult(false, "team_members(com.arshtraders.fieldtracker.data.database.entities.TeamMemberEntity).\n"
+                  + " Expected:\n" + _infoTeamMembers + "\n"
+                  + " Found:\n" + _existingTeamMembers);
+        }
+        final HashMap<String, TableInfo.Column> _columnsAuditLogs = new HashMap<String, TableInfo.Column>(9);
+        _columnsAuditLogs.put("id", new TableInfo.Column("id", "TEXT", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsAuditLogs.put("userId", new TableInfo.Column("userId", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsAuditLogs.put("action", new TableInfo.Column("action", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsAuditLogs.put("entityType", new TableInfo.Column("entityType", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsAuditLogs.put("entityId", new TableInfo.Column("entityId", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsAuditLogs.put("details", new TableInfo.Column("details", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsAuditLogs.put("timestamp", new TableInfo.Column("timestamp", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsAuditLogs.put("deviceInfo", new TableInfo.Column("deviceInfo", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsAuditLogs.put("ipAddress", new TableInfo.Column("ipAddress", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        final HashSet<TableInfo.ForeignKey> _foreignKeysAuditLogs = new HashSet<TableInfo.ForeignKey>(0);
+        final HashSet<TableInfo.Index> _indicesAuditLogs = new HashSet<TableInfo.Index>(0);
+        final TableInfo _infoAuditLogs = new TableInfo("audit_logs", _columnsAuditLogs, _foreignKeysAuditLogs, _indicesAuditLogs);
+        final TableInfo _existingAuditLogs = TableInfo.read(db, "audit_logs");
+        if (!_infoAuditLogs.equals(_existingAuditLogs)) {
+          return new RoomOpenHelper.ValidationResult(false, "audit_logs(com.arshtraders.fieldtracker.data.database.entities.AuditLogEntity).\n"
+                  + " Expected:\n" + _infoAuditLogs + "\n"
+                  + " Found:\n" + _existingAuditLogs);
+        }
         return new RoomOpenHelper.ValidationResult(true, null);
       }
-    }, "ac732b0551bbbe92b728c33bff4c6f7d", "8ae2b03909417e45433f158565f4e1ea");
+    }, "2e45835eaa5b59fdf793cb992e65872b", "cca48c1cb46e044b2efab6f4d5150da9");
     final SupportSQLiteOpenHelper.Configuration _sqliteConfig = SupportSQLiteOpenHelper.Configuration.builder(config.context).name(config.name).callback(_openCallback).build();
     final SupportSQLiteOpenHelper _helper = config.sqliteOpenHelperFactory.create(_sqliteConfig);
     return _helper;
@@ -182,7 +276,7 @@ public final class AppDatabase_Impl extends AppDatabase {
   protected InvalidationTracker createInvalidationTracker() {
     final HashMap<String, String> _shadowTablesMap = new HashMap<String, String>(0);
     final HashMap<String, Set<String>> _viewTables = new HashMap<String, Set<String>>(0);
-    return new InvalidationTracker(this, _shadowTablesMap, _viewTables, "location_points","punches","places");
+    return new InvalidationTracker(this, _shadowTablesMap, _viewTables, "location_points","punches","places","users","teams","team_members","audit_logs");
   }
 
   @Override
@@ -194,6 +288,10 @@ public final class AppDatabase_Impl extends AppDatabase {
       _db.execSQL("DELETE FROM `location_points`");
       _db.execSQL("DELETE FROM `punches`");
       _db.execSQL("DELETE FROM `places`");
+      _db.execSQL("DELETE FROM `users`");
+      _db.execSQL("DELETE FROM `teams`");
+      _db.execSQL("DELETE FROM `team_members`");
+      _db.execSQL("DELETE FROM `audit_logs`");
       super.setTransactionSuccessful();
     } finally {
       super.endTransaction();
@@ -211,6 +309,9 @@ public final class AppDatabase_Impl extends AppDatabase {
     _typeConvertersMap.put(LocationDao.class, LocationDao_Impl.getRequiredConverters());
     _typeConvertersMap.put(PunchDao.class, PunchDao_Impl.getRequiredConverters());
     _typeConvertersMap.put(PlaceDao.class, PlaceDao_Impl.getRequiredConverters());
+    _typeConvertersMap.put(UserDao.class, UserDao_Impl.getRequiredConverters());
+    _typeConvertersMap.put(TeamDao.class, TeamDao_Impl.getRequiredConverters());
+    _typeConvertersMap.put(AuditLogDao.class, AuditLogDao_Impl.getRequiredConverters());
     return _typeConvertersMap;
   }
 
@@ -267,6 +368,48 @@ public final class AppDatabase_Impl extends AppDatabase {
           _placeDao = new PlaceDao_Impl(this);
         }
         return _placeDao;
+      }
+    }
+  }
+
+  @Override
+  public UserDao userDao() {
+    if (_userDao != null) {
+      return _userDao;
+    } else {
+      synchronized(this) {
+        if(_userDao == null) {
+          _userDao = new UserDao_Impl(this);
+        }
+        return _userDao;
+      }
+    }
+  }
+
+  @Override
+  public TeamDao teamDao() {
+    if (_teamDao != null) {
+      return _teamDao;
+    } else {
+      synchronized(this) {
+        if(_teamDao == null) {
+          _teamDao = new TeamDao_Impl(this);
+        }
+        return _teamDao;
+      }
+    }
+  }
+
+  @Override
+  public AuditLogDao auditLogDao() {
+    if (_auditLogDao != null) {
+      return _auditLogDao;
+    } else {
+      synchronized(this) {
+        if(_auditLogDao == null) {
+          _auditLogDao = new AuditLogDao_Impl(this);
+        }
+        return _auditLogDao;
       }
     }
   }
