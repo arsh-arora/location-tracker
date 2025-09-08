@@ -1,0 +1,69 @@
+com.arshtraders.fieldtracker.app-lifecycle-runtime-ktx-2.7.0-0 /Users/aroraji/.gradle/caches/transforms-3/00da4447f7aebe2be8492db7051662fc/transformed/lifecycle-runtime-ktx-2.7.0/res
+com.arshtraders.fieldtracker.app-material3-release-1 /Users/aroraji/.gradle/caches/transforms-3/11bfdda85021a914eb0ffd98815e43e0/transformed/material3-release/res
+com.arshtraders.fieldtracker.app-material-release-2 /Users/aroraji/.gradle/caches/transforms-3/12174164b8c40f4d3f68d4dc22ad76b8/transformed/material-release/res
+com.arshtraders.fieldtracker.app-ui-unit-release-3 /Users/aroraji/.gradle/caches/transforms-3/121fbe9e0163a55b5eb6f35dca377803/transformed/ui-unit-release/res
+com.arshtraders.fieldtracker.app-ui-graphics-release-4 /Users/aroraji/.gradle/caches/transforms-3/160409fe66c1c2cde63048a799e7b0e6/transformed/ui-graphics-release/res
+com.arshtraders.fieldtracker.app-hilt-work-1.1.0-5 /Users/aroraji/.gradle/caches/transforms-3/16146e9c35dd4fd3e0debcebf1352cf3/transformed/hilt-work-1.1.0/res
+com.arshtraders.fieldtracker.app-foundation-layout-release-6 /Users/aroraji/.gradle/caches/transforms-3/178ae864c767133d0948a86e9a4bdaec/transformed/foundation-layout-release/res
+com.arshtraders.fieldtracker.app-navigation-runtime-ktx-2.7.6-7 /Users/aroraji/.gradle/caches/transforms-3/23a9af392cedce55b0257fa0599ade73/transformed/navigation-runtime-ktx-2.7.6/res
+com.arshtraders.fieldtracker.app-runtime-saveable-release-8 /Users/aroraji/.gradle/caches/transforms-3/24742c5496516004ac2fabc39c7c4137/transformed/runtime-saveable-release/res
+com.arshtraders.fieldtracker.app-navigation-common-ktx-2.7.6-9 /Users/aroraji/.gradle/caches/transforms-3/272e33a4199cb69bbd7a15b11d0b11f5/transformed/navigation-common-ktx-2.7.6/res
+com.arshtraders.fieldtracker.app-navigation-compose-2.7.6-10 /Users/aroraji/.gradle/caches/transforms-3/2c8883007e9cb71e35c6775cea47f805/transformed/navigation-compose-2.7.6/res
+com.arshtraders.fieldtracker.app-lifecycle-viewmodel-2.7.0-11 /Users/aroraji/.gradle/caches/transforms-3/2fbbf6b4e063ec9c6c44cf2acd177a42/transformed/lifecycle-viewmodel-2.7.0/res
+com.arshtraders.fieldtracker.app-annotation-experimental-1.4.0-12 /Users/aroraji/.gradle/caches/transforms-3/385b70d9aa6bf20faad8469fa0372171/transformed/annotation-experimental-1.4.0/res
+com.arshtraders.fieldtracker.app-material-ripple-release-13 /Users/aroraji/.gradle/caches/transforms-3/39c99e991125059031da3269d7c7b686/transformed/material-ripple-release/res
+com.arshtraders.fieldtracker.app-ui-geometry-release-14 /Users/aroraji/.gradle/caches/transforms-3/5e8ee5101e8be93d514eaa73cccb0304/transformed/ui-geometry-release/res
+com.arshtraders.fieldtracker.app-ui-tooling-preview-release-15 /Users/aroraji/.gradle/caches/transforms-3/5ffaca088c0c023121540504e68bfdad/transformed/ui-tooling-preview-release/res
+com.arshtraders.fieldtracker.app-animation-release-16 /Users/aroraji/.gradle/caches/transforms-3/61ff1bfb5d4669028db73a283181660a/transformed/animation-release/res
+com.arshtraders.fieldtracker.app-play-services-base-18.1.0-17 /Users/aroraji/.gradle/caches/transforms-3/62552da758a27f31adccc4e629b5776c/transformed/play-services-base-18.1.0/res
+com.arshtraders.fieldtracker.app-room-ktx-2.6.1-18 /Users/aroraji/.gradle/caches/transforms-3/6544200d83a010ee4e26ccc577247e14/transformed/room-ktx-2.6.1/res
+com.arshtraders.fieldtracker.app-savedstate-ktx-1.2.1-19 /Users/aroraji/.gradle/caches/transforms-3/764a90271b6ff9ff9ed91a6e7022d5b8/transformed/savedstate-ktx-1.2.1/res
+com.arshtraders.fieldtracker.app-startup-runtime-1.1.1-20 /Users/aroraji/.gradle/caches/transforms-3/79a76927ead3e4c91fc0ddd564bd131c/transformed/startup-runtime-1.1.1/res
+com.arshtraders.fieldtracker.app-animation-core-release-21 /Users/aroraji/.gradle/caches/transforms-3/7af09351031f119b01509a8e46a923d6/transformed/animation-core-release/res
+com.arshtraders.fieldtracker.app-ui-tooling-release-22 /Users/aroraji/.gradle/caches/transforms-3/80e515b2ac45d240390df987628a05de/transformed/ui-tooling-release/res
+com.arshtraders.fieldtracker.app-work-runtime-2.9.0-23 /Users/aroraji/.gradle/caches/transforms-3/85854b62ab4fc01fb2f0b9000c32cae2/transformed/work-runtime-2.9.0/res
+com.arshtraders.fieldtracker.app-lifecycle-livedata-core-ktx-2.7.0-24 /Users/aroraji/.gradle/caches/transforms-3/8a11f67c50820d1d121dc01e333c010e/transformed/lifecycle-livedata-core-ktx-2.7.0/res
+com.arshtraders.fieldtracker.app-core-ktx-1.12.0-25 /Users/aroraji/.gradle/caches/transforms-3/8a14cffecab518295fa46a13acefe70d/transformed/core-ktx-1.12.0/res
+com.arshtraders.fieldtracker.app-profileinstaller-1.3.0-26 /Users/aroraji/.gradle/caches/transforms-3/8c0eebdf821f1f7b0651e34b1070c69c/transformed/profileinstaller-1.3.0/res
+com.arshtraders.fieldtracker.app-customview-poolingcontainer-1.0.0-27 /Users/aroraji/.gradle/caches/transforms-3/8cbadf3ae6eb5c6d6f85bd7b69f6a460/transformed/customview-poolingcontainer-1.0.0/res
+com.arshtraders.fieldtracker.app-lifecycle-runtime-2.7.0-28 /Users/aroraji/.gradle/caches/transforms-3/925304ebf19ed87264f04eaae01ff549/transformed/lifecycle-runtime-2.7.0/res
+com.arshtraders.fieldtracker.app-hilt-navigation-compose-1.1.0-29 /Users/aroraji/.gradle/caches/transforms-3/9278951d53e144ea8a97ef5a185b21a4/transformed/hilt-navigation-compose-1.1.0/res
+com.arshtraders.fieldtracker.app-core-1.12.0-30 /Users/aroraji/.gradle/caches/transforms-3/937fe1a07234e81601c10823319d471e/transformed/core-1.12.0/res
+com.arshtraders.fieldtracker.app-fragment-1.5.1-31 /Users/aroraji/.gradle/caches/transforms-3/95904a9e0b055e43f2595a0e7bd5b714/transformed/fragment-1.5.1/res
+com.arshtraders.fieldtracker.app-activity-compose-1.8.2-32 /Users/aroraji/.gradle/caches/transforms-3/97971c8da3d22ca17b94b8f2cfbbb3be/transformed/activity-compose-1.8.2/res
+com.arshtraders.fieldtracker.app-play-services-basement-18.1.0-33 /Users/aroraji/.gradle/caches/transforms-3/98bb9cad49c4ab716a51fee610dc5886/transformed/play-services-basement-18.1.0/res
+com.arshtraders.fieldtracker.app-sqlite-2.4.0-34 /Users/aroraji/.gradle/caches/transforms-3/9b78688ef7c7c325afd5e4b0797a48a7/transformed/sqlite-2.4.0/res
+com.arshtraders.fieldtracker.app-ui-release-35 /Users/aroraji/.gradle/caches/transforms-3/a078852fb207cc443f16080f084c9260/transformed/ui-release/res
+com.arshtraders.fieldtracker.app-hilt-navigation-1.1.0-36 /Users/aroraji/.gradle/caches/transforms-3/a4b366ae73734ee7d11a348e614dd9f6/transformed/hilt-navigation-1.1.0/res
+com.arshtraders.fieldtracker.app-room-runtime-2.6.1-37 /Users/aroraji/.gradle/caches/transforms-3/a7b6a748d5db169761ed0fcadcf684d5/transformed/room-runtime-2.6.1/res
+com.arshtraders.fieldtracker.app-savedstate-1.2.1-38 /Users/aroraji/.gradle/caches/transforms-3/ac306d621d74a4d6f2b78123815f2083/transformed/savedstate-1.2.1/res
+com.arshtraders.fieldtracker.app-lifecycle-viewmodel-ktx-2.7.0-39 /Users/aroraji/.gradle/caches/transforms-3/af666d88553cec6656f4dae5d94d3d79/transformed/lifecycle-viewmodel-ktx-2.7.0/res
+com.arshtraders.fieldtracker.app-lifecycle-viewmodel-compose-2.7.0-40 /Users/aroraji/.gradle/caches/transforms-3/b394644989fe5e185b9af527356b2f3b/transformed/lifecycle-viewmodel-compose-2.7.0/res
+com.arshtraders.fieldtracker.app-sqlite-framework-2.4.0-41 /Users/aroraji/.gradle/caches/transforms-3/b73f0948acaabdd1a0530b7b744b498f/transformed/sqlite-framework-2.4.0/res
+com.arshtraders.fieldtracker.app-lifecycle-service-2.7.0-42 /Users/aroraji/.gradle/caches/transforms-3/b94f5f23f1826e6c066bbe09e4abcf2e/transformed/lifecycle-service-2.7.0/res
+com.arshtraders.fieldtracker.app-material-icons-extended-release-43 /Users/aroraji/.gradle/caches/transforms-3/b9f662b3df77a8f84fc079954f7d15a1/transformed/material-icons-extended-release/res
+com.arshtraders.fieldtracker.app-ui-util-release-44 /Users/aroraji/.gradle/caches/transforms-3/bbcd36319f491aa63084b6d90acd74e0/transformed/ui-util-release/res
+com.arshtraders.fieldtracker.app-lifecycle-livedata-core-2.7.0-45 /Users/aroraji/.gradle/caches/transforms-3/bd8e2c139ac22db933504103ae8aa020/transformed/lifecycle-livedata-core-2.7.0/res
+com.arshtraders.fieldtracker.app-navigation-runtime-2.7.6-46 /Users/aroraji/.gradle/caches/transforms-3/ca0984576719ebb6c883a6fd29617993/transformed/navigation-runtime-2.7.6/res
+com.arshtraders.fieldtracker.app-lifecycle-process-2.7.0-47 /Users/aroraji/.gradle/caches/transforms-3/cc0fd4f8e537edf68d08b9b624e3adcb/transformed/lifecycle-process-2.7.0/res
+com.arshtraders.fieldtracker.app-material-icons-core-release-48 /Users/aroraji/.gradle/caches/transforms-3/d3fd1bb73a07404ae6f00b847c0bc0a5/transformed/material-icons-core-release/res
+com.arshtraders.fieldtracker.app-lifecycle-livedata-2.7.0-49 /Users/aroraji/.gradle/caches/transforms-3/d75caad650b1f5be16330a9b38df2d05/transformed/lifecycle-livedata-2.7.0/res
+com.arshtraders.fieldtracker.app-activity-1.8.2-50 /Users/aroraji/.gradle/caches/transforms-3/d780f069b4a78ae74acf5f04ffd19827/transformed/activity-1.8.2/res
+com.arshtraders.fieldtracker.app-ui-test-manifest-1.6.1-51 /Users/aroraji/.gradle/caches/transforms-3/de66495305b6560e60c592a65f2499bc/transformed/ui-test-manifest-1.6.1/res
+com.arshtraders.fieldtracker.app-lifecycle-viewmodel-savedstate-2.7.0-52 /Users/aroraji/.gradle/caches/transforms-3/e38b004cac3d4c955ed83bb1e0ea0172/transformed/lifecycle-viewmodel-savedstate-2.7.0/res
+com.arshtraders.fieldtracker.app-navigation-common-2.7.6-53 /Users/aroraji/.gradle/caches/transforms-3/e8b7a87f37728adf75088b70742b2ce9/transformed/navigation-common-2.7.6/res
+com.arshtraders.fieldtracker.app-emoji2-1.3.0-54 /Users/aroraji/.gradle/caches/transforms-3/ec9ac206ed76e66efaa1c0bd1aaeb13a/transformed/emoji2-1.3.0/res
+com.arshtraders.fieldtracker.app-foundation-release-55 /Users/aroraji/.gradle/caches/transforms-3/f144351a793805fb3fcfa8df275e1334/transformed/foundation-release/res
+com.arshtraders.fieldtracker.app-runtime-release-56 /Users/aroraji/.gradle/caches/transforms-3/f24d79325dbe12e10f815e5028ec89f1/transformed/runtime-release/res
+com.arshtraders.fieldtracker.app-ui-text-release-57 /Users/aroraji/.gradle/caches/transforms-3/f4f413b37700edf2ab2d4601236a4bf1/transformed/ui-text-release/res
+com.arshtraders.fieldtracker.app-activity-ktx-1.8.2-58 /Users/aroraji/.gradle/caches/transforms-3/f5bf6917a47b7828d8318f48ee9c79d6/transformed/activity-ktx-1.8.2/res
+com.arshtraders.fieldtracker.app-ui-tooling-data-release-59 /Users/aroraji/.gradle/caches/transforms-3/f65aca47d900143ef6d7ec03ec77320b/transformed/ui-tooling-data-release/res
+com.arshtraders.fieldtracker.app-work-runtime-ktx-2.9.0-60 /Users/aroraji/.gradle/caches/transforms-3/fd5d21a09bfb239c4d48bdbd06b2ec00/transformed/work-runtime-ktx-2.9.0/res
+com.arshtraders.fieldtracker.app-core-runtime-2.2.0-61 /Users/aroraji/.gradle/caches/transforms-3/fff14155a11255ed9b0746a5a082c0fb/transformed/core-runtime-2.2.0/res
+com.arshtraders.fieldtracker.app-pngs-62 /Users/aroraji/arsh_traders/location tracking/FieldTracker/app/build/generated/res/pngs/debug
+com.arshtraders.fieldtracker.app-resValues-63 /Users/aroraji/arsh_traders/location tracking/FieldTracker/app/build/generated/res/resValues/debug
+com.arshtraders.fieldtracker.app-packageDebugResources-64 /Users/aroraji/arsh_traders/location tracking/FieldTracker/app/build/intermediates/incremental/debug/packageDebugResources/merged.dir
+com.arshtraders.fieldtracker.app-packageDebugResources-65 /Users/aroraji/arsh_traders/location tracking/FieldTracker/app/build/intermediates/incremental/debug/packageDebugResources/stripped.dir
+com.arshtraders.fieldtracker.app-merged_res-66 /Users/aroraji/arsh_traders/location tracking/FieldTracker/app/build/intermediates/merged_res/debug
+com.arshtraders.fieldtracker.app-debug-67 /Users/aroraji/arsh_traders/location tracking/FieldTracker/app/src/debug/res
+com.arshtraders.fieldtracker.app-main-68 /Users/aroraji/arsh_traders/location tracking/FieldTracker/app/src/main/res
